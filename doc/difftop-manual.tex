@@ -1,0 +1,1134 @@
+\documentclass[11pt]{article}
+\usepackage{subfigure}
+\usepackage{graphics}
+\usepackage{amssymb}
+\usepackage{epsf}
+\usepackage{epsfig}
+\usepackage{rotating}
+\usepackage{pstricks}
+\usepackage{color}
+\usepackage{url} 
+%csm added
+\usepackage{cite} 
+%
+\usepackage[margin=2.cm]{geometry}
+%\topmargin{2.cm}
+\newcommand{\lr}[1]{{ \left( \, #1 \, \right) }}
+\def\baselinestretch{1.3}
+\textheight 23.5cm   \textwidth 16cm
+\oddsidemargin -2pt
+\evensidemargin 0pt
+\newcommand{\lbl}[1]{\label{eq:#1}}
+\newcommand{\epo}{\;\:.}
+\newcommand{\amu}{a_\mu}
+\def\d{\delta}
+\def\w{\omega}
+\def\nbar{\bar{n}}
+\def\slashed{\ds}
+\def\e{\epsilon}
+\def\a{\alpha}
+\def\b{\beta}
+\def\bs{\bar\beta}\def\ts{\bar t}
+\def\l{\lambda}
+\def\im{\imath}
+%\def\d{\Delta}
+\def\g{\gamma}
+\def\dpr{\Delta '}
+\def\su{\sigma_1}
+\def\sd{\sigma_2}
+\def\st{\sigma_3}
+\def\lp{\lambda_{+}}
+\def\lm{\lambda_{-}}
+\def\lpm{\lambda_{\pm}}
+\def\taup{\tau_{+}}
+\def\taum{\tau_{-}}
+\def\taupm{\tau_{\pm}}
+%\def\th{\theta}
+%\def\t{s_3}
+\def\zp{\xi_{+}}
+\def\zm{\xi_{-}}
+\def\zpm{\xi_{\pm}}
+\def\cp{\xi_{+}}
+\def\cm{\xi_{-}}
+\def\cpm{\xi_{\pm}}
+\def\r{\rho}
+\def\m{\mu}
+\def\rop{\rho_{+}}
+\def\rom{\rho_{-}}
+\def\ropm{\rho_{\pm}}
+\def\di{\eta_-}
+\def\so{\eta_+}
+\def\tol{\longrightarrow}
+\def\li#1{\,{\rm Li}_2\left(#1 \right)}
+\def\dl#1{$$\displaylines{\quad#1}$$}
+\def\nl{\hfill\cr\hfill}
+\def\tr{\mathop{\rm Tr}}
+\def\ds#1{#1\kern-1ex\hbox{/}}
+\def\dsh{h\kern-1.2ex /}
+\def\mod#1{|{\bf #1}|}
+\def\Nep{{\rm N}(\e)}
+
+
+\let\G=\Gamma  \let\D=\Delta \let\Q=\Theta  \let\L=\Lambda
+\let\X=\Xi     \let\P=\Pi    \let\S=\Sigma  \let\U=\Upsilon
+\let\F=\Phi    \let\Y=\Psi   \let\C=\Chi    \let\W=\Omega
+%
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\td}{\tilde}
+\def\ul{\underline}
+\def\nn{\nonumber}
+\def\beq{\begin{equation}}
+\def\eeq{\end{equation}}
+\def\Q{{\bf Q}}
+\def\z{{\zeta}}
+\def\R{{\bf R}}
+\def\beqn{\begin{eqnarray}}
+\def\eeqn{\end{eqnarray}}
+\def\ba{\begin{eqnarray}}
+\def\ea{\end{eqnarray}}
+\def\ie{{\it i.e.}}
+\def\eg{{\it e.g.}}
+\def\half{{ style{1\over 2}}}
+\def\nicefrac#1#2{\hbox{${#1\over #2}$}}
+\def\third{{ style {1\over3}}}
+\def\quarter{{ style {1\over4}}}
+\def\m{{\tt -}}
+\def\atp{\frac{\alpha_s(Q^2)}{2\pi}}
+\def\afp{\frac{\alpha_s(Q^2)}{4\pi}}
+\def\p{{\tt +}}
+
+\def\slash#1{#1\hskip-6pt/\hskip6pt}
+\def\slk{\slash{k}}
+\def\GeV{\,{\rm GeV}}
+\def\TeV{\,{\rm TeV}}
+\def\y{\,{\rm y}}
+\def\one {\bf  1}
+
+\hyphenation{counter-terms}
+
+\setcounter{footnote}{0}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\beqa}{\begin{eqnarray}}
+\newcommand{\eeqa}{\end{eqnarray}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\la}{\lambda}
+\newcommand{\ro}{\rho}
+\newcommand{\si}{\sigma}
+\newcommand{\veps}{\varepsilon}
+\newcommand{\ee}{\end{equation}}
+%\makeatletter
+%\usepackage{babel}
+%\makeatother
+\def\li#1{\,{\rm Li}_2\left(#1 \right)}
+\newcommand{\Li}[2]{{\mbox{Li}}_{#1}\left(#2\right)}
+
+
+\begin{document}
+%\noindent
+%DESY 14-077\\
+%LPN 14-076\\
+%SFB/CPP-14-27\\
+\hfill
+\begin{center}
+
+\vspace{1.0cm}
+{\bf \large \textsc{DiffTop}: a code for the calculation of the differential cross section for heavy-quark pair production at hadron colliders}
+
+\vspace{1.0cm}
+
+{\bf \large \textsc{DiffTop}-1.0.0 Users manual}
+\vspace{0.5cm}
+
+\vspace{1cm}
+{ \bf Marco Guzzi$^a$, Katerina Lipka$^a$ and Sven-Olaf Moch$^{b,c}$}
+
+
+%\vspace{1cm}
+
+
+{\it $^a$Deutsches Elektronen-Synchrotron DESY, \\Notkestrasse 85, D-22607 Hamburg, Germany\\}
+{\it $^b$II.~Institut f\"ur Theoretische Physik, Universit\"at Hamburg, \\Luruper Chaussee 149, D-22761 Hamburg, Germany\\}
+{\it $^c$Deutsches Elektronen-Synchrotron DESY,\\ Platanenallee 6, D-15738 Zeuthen, Germany}
+\vspace{.5cm}\footnote{marco.guzzi@desy.de, katerina.lipka@desy.de, sven-olaf.moch@desy.de}
+
+\begin{abstract}
+
+
+The \textsc{DiffTop} Fortran based package is presented. 
+This program allows the user to calculate the differential and total cross section 
+for heavy-quark pair production at hadron colliders in 1PI kinematics. 
+The cross sections are calculated in perturbative 
+QCD at leading ${\cal O}(\alpha_s^2)$, approximate next-to-leading ${\cal O}(\alpha_s^3)$ and 
+approximate next-to-next-to-leading order ${\cal O}(\alpha_s^4)$, by using 
+methods of threshold resummation beyond the leading logarithmic accuracy.
+The package is very flexible and all computation inputs can be easily modified by 
+editing a user options text file.
+
+
+\end{abstract}
+\end{center}
+\date{\today}
+\newpage
+
+
+
+\section{Program summary}\label{sec:Program summary}
+
+{\it Program title:} \textsc{DiffTop}~(ver. 1.0.1)
+\newline
+{\it Licensing provisions:} none
+\newline
+{\it Programming language:} \textsc{Fortran}
+\newline
+{\it Compiler:} gfortran 
+\newline
+{\it Computer:} All 
+\newline
+{\it Operating system:} Linux 
+\newline
+{\it Running time:} For the differential cross sections it depends on the inputs. 
+On a ``Intel Core-i7'' CPU M 640 at 2.80GHz $\times$ 4, a usual run takes 7-8 hours for a 40 points grid. 
+The total cross section computation takes approximately 30 minutes. 
+\newline
+{\it Nature of the problem:} Calculation of differential and total cross section at LO, 
+approximate NLO and NNLO in QCD by using techniques of threshold resummation beyond the leading logarithmic approximation.
+\newline
+{\it Key words:} Top-quark Physics, Hadron Colliders, QCD, Threshold Resummation, 
+
+
+\section{Introduction}\label{sec:kinem-cross-sect}
+
+Studies of heavy-quark production at hadron colliders provide stringent tests of quantum chromodynamics 
+(QCD) and of the theory of electroweak (EW) interactions. These are of crucial 
+importance in searches for signatures of physics Beyond the Standard Model (BSM).
+
+The comparison of QCD predictions with the data and a multitude of phenomenological analyses of interest  
+require to have precise predictions not only for the inclusive cross section, but also at differential level. 
+Invariant mass distribution of the heavy-quark pair, transverse momentum and rapidity distributions of the final-state 
+heavy quark or pair, are examples of differential distributions needed at the highest perturbative order possible. 
+
+The QCD corrections to heavy-quark production at hadron colliders at the next-to-leading order 
+(NLO), ${\cal O}(\alpha_s^3)$, are known since many years~\cite{Nason:1987xz,Nason:1989zy,Beenakker:1988bq,Meng:1989rp,Beenakker:1990maa,Mangano:1991jk}. 
+The full calculation at next-to-next-to-leading order (NNLO), ${\cal O}(\alpha_s^4)$, 
+for the inclusive cross section has been accomplished only recently~\cite{Czakon:2013goa,Czakon:2012pz,Czakon:2012zr,Baernreuther:2012ws} 
+and required continuous efforts of the QCD community in calculating radiative corrections 
+and in the development of computational tools~\cite{Czakon:2007wk,Czakon:2007ej,Mitov:2006xs,Ferroglia:2009ep,Ferroglia:2009ii,Czakon:2010td,Bierenbaum:2011gg,Baernreuther:2013caa}. The NNLO calculation of the inclusive cross section for the $t\bar{t}$ production is implemented 
+in the \textsc{C++} computer programs \textsc{Top++}~\cite{Czakon:2011xx} and \textsc{Hathor}~\cite{Aliev:2010zk}.
+In these calculations the final-state top quarks are considered in the on-shell approximation.
+
+The use of threshold resummation methods allows one to derive approximate formulas 
+at NNLO for differential distributions, in which the cross sections
+are expanded in terms of the logarithmic enhanced contributions (appearing as plus distributions), 
+and can therefore be written at various degrees of logarithmic accuracy.
+Studies at the next-to-leading-logarithmic (NLL), next-to-next-to-leading-logarithmic (NNLL) 
+accuracy and beyond can be found in Refs.~\cite{Kidonakis:2014isa,Kidonakis:2000ui,Kidonakis:2001nj,Kidonakis:2003tx,Kidonakis:2003qe,Kidonakis:2005kz,Kidonakis:2008mu,Kidonakis:2010tc,Kidonakis:2010dk,Czakon:2009zw} and references therein.
+
+The approximate NNLO ${\cal O}(\alpha_s^4)$ calculation for the 
+differential cross section in the single-particle inclusive (1PI) kinematic for heavy-flavor 
+production at hadron colliders is discussed in Ref.~\cite{Guzzi:2014wia}. 
+This calculation is implemented in a novel computer code $\textsc{DiffTop}$, that is presented here 
+and is available at~\cite{difftop_web} .
+Techniques of logarithmic expansion beyond the leading 
+logarithmic accuracy in QCD threshold resummation are used.
+
+
+
+
+
+
+
+
+
+\section{One-particle inclusive (1PI) kinematics}\label{sec:one-part-incl}
+
+In this section a brief description of the 1PI kinematics is given together with 
+the structure of the differential cross section calculation as implemented in the code.
+More details can be found in Ref.~\cite{Guzzi:2014wia}.
+
+Heavy-quark hadroproduction in 1PI kinematics is defined by the reaction
+\begin{eqnarray}
+\label{eq:3}
+h_1(P_1) +\, h_2(P_2) &\longrightarrow& {\rm{Q}}(p_1) +\,
+X[{\overline{\rm{Q}}}](p_X)\, , 
+\end{eqnarray}
+where $h_1$ and $h_2$ are hadrons, $X[\overline{\rm{Q}}]$ denotes any
+allowed hadronic final state of momentum $p_X$ containing at least the heavy antiquark,
+and ${\rm{Q}}(p_1)$ is the identified heavy quark with mass $m$. The
+hadronic invariants in this reaction are
+\begin{equation}
+  \label{eq:5}
+S = (P_1+P_2)^2 \quad,\quad T_1 = (P_2-p_1)^2-m^2 \quad,\quad U_1 =
+(P_1-p_1)^2-m^2\,, 
+\end{equation}
+and
+\begin{equation}
+  \label{eq:6}
+S_4 = S+T_1+U_1\,  ,  
+\end{equation}
+where $S_4$ is a measure of the inelasticity of the hadronic reaction 
+(\ref{eq:3}).  Near the threshold, reaction (\ref{eq:3}) is dominated by
+the partonic subprocesses
+\begin{eqnarray}
+  \label{eq:7}
+q(k_1) +\, {\overline{q}}(k_2) &\longrightarrow& {\rm{Q}}(p_1) +\,
+X'[{\overline{\rm{Q}}}](p_2')\, ,
+\\[1ex]
+\label{eq:8}  
+g(k_1) +\, g(k_2) &\longrightarrow& {\rm{Q}}(p_1) +\,
+X'[{\overline{\rm{Q}}}](p_2')\, . 
+\end{eqnarray}
+If $X'[{\overline{\rm{Q}}}](p_2')={\overline{\rm{Q}}}(\bar{p}_2)$, the reaction
+is at partonic threshold and the heavy antiquark has momentum
+$\bar{p}_2$.  Note that threshold production does not
+mean that the heavy quarks are produced at rest.  The $qg$ and
+$\overline{q}g$ channels contribute at one order higher in $\alpha_s$ than 
+reactions (\ref{eq:7}) and ({\ref{eq:8})~\footnote{For example,
+ for top quark pair production at the Tevatron
+  $p\bar{p}$ collider these subprocesses contribute
+  only 1\% of the total cross section 
+\cite{Nason:1987xz,Beenakker:1988bq,Beenakker:1990maa}.}.  
+The partonic invariants corresponding to the hadronic ones in Eq.(\ref{eq:5}) are
+\begin{eqnarray}
+  \label{eq:9}
+s\,=\,(k_1+k_2)^2\, , \hspace*{10mm}t_1\,=\,(k_2-p_1)^2-m^2\, ,
+\hspace*{10mm}u_1\,=\,(k_1-p_1)^2-m^2\, .
+\end{eqnarray}
+The invariant $s_4 = (p'_2)^2-m^2$ which measures the inelasticity of
+the partonic reactions (\ref{eq:7}) and (\ref{eq:8}) is related to the
+other partonic invariants by
+\begin{eqnarray}
+  \label{eq:10}
+s_4 &=& s + t_1 + u_1\, .  
+\end{eqnarray}
+
+
+
+The factorized differential cross section for reaction (\ref{eq:3}) is written as 
+\ba
+S^2\frac{d^2 \sigma(S,T_1,U_1)}{dT_1 ~dU_1} &=& \sum_{i,j=q,\bar{q},g} \int_{x_1^-}^{1} \frac{dx_1}{x_1}
+\int_{x_2^-}^{1}\frac{dx_2}{x_2} f_{i/H_1}(x_1,\mu_F^2) f_{j/H_2}(x_2,\mu_F^2) 
+\nonumber\\ 
+&&\times \, \omega_{ij}(s,t_1,u_1,m_Q^2, \mu_F^2,\alpha_s(\mu_R^2)) + {\cal O}(\Lambda^2/m_Q^2)
+\label{diffXsec}
+\ea
+where $f_{j/H}(x,\mu_F^2)$ is the probability of finding the parton $j$ in hadron $H$, 
+$\mu_F$ and $\mu_R$ are the factorization and renormalization scales respectively, and  
+$\omega_{ij}$ is the hard scattering cross section in the 1PI kinematic. 
+Power suppressed terms indicated by ${\cal O}(\Lambda^2/m_Q^2)$ are neglected in the current implementation.
+
+The parton momentum fractions $x_1$ and $x_2$ have lower limits $x_1^-$ and $x_2^-$, which 
+in 1PI kinematics are given by $x_1^- = -U_1/(S+T_1)$ and $x_2^-= -x_1 T_1/(x_1S+U_1)$.
+Ref.~\cite{Beenakker:1990maa} contains an exact NLO treatment of this kinematic 
+at the parton and hadron levels.
+
+According to QCD resummation, in the organization of the large logarithms 
+at the threshold of the heavy system, the hard scattering $\omega_{ij}$ functions are expanded in 
+terms of singular functions which are plus-distributions of the type
+\beq
+\left[\frac{\ln^l{(s_4/m_Q^2)}}{s_4} \right]_{+} = \lim_{\Delta\rightarrow 0}\left\{\frac{\ln^l{(s_4/m_Q^2)}}{s_4}\theta(s_4-\Delta)
++\frac{1}{l+1}\ln^{l+1}{\left( \frac{\Delta}{m_Q^2}\right)}\delta(s_4)\right\}\,,
+\label{plus}
+\eeq
+where corrections are denoted as leading-logarithmic (LL) if $l=2 i+1$ at ${\cal O}(\alpha_s^{i+3})$ with $i=0,1,\dots$, 
+as next-to-leading logarithm (NLL) if $l=2 i$, as next-to-next-to-leading logarithm (NNLL) if $l=2 i - 1$, and so on.
+
+The variables $T_1$ and $U_1$ are related in 1PI kinematics to 
+the transverse momentum $p_T$ and rapidity $y$ of a single final-state heavy quark.
+The definition of the transverse mass $m_T$ of a single heavy quark is given by 
+\begin{equation}
+\label{eq:mt2-1pi}
+  m_T^2 =  m^2 + p_T^2\, ,
+\end{equation}
+and precise relations to the hadronic variables can be obtained as 
+\begin{eqnarray}
+T_1 \,=\, - m_T\, \sqrt{S}\,\exp(+y)\, ,  
+\qquad\qquad 
+U_1 \,=\, - m_T\,\sqrt{S}\,\exp(-y)\, .
+\end{eqnarray}
+
+Some algebra leads to the integration boundaries, which are given by  
+\begin{eqnarray}
+{S \over 2} \big(1 - \beta_S \big)   
+\,\le& -T_1 &\le\, 
+{S \over 2} \big(1 + \beta_S \big) \, , \\
+- m^2 { S \over T_1}
+\,\le& -U_1 &\le\, 
+S + T_1\, ,
+\end{eqnarray}
+where $\beta_S=\sqrt{1-4m^2/S}$.
+Depending on the order of integration, the phase space boundaries for
+$y$ and $m_T$ are as follows.
+For 
+\begin{eqnarray}
+\int d(-T_1) \int d(-U_1) &=& S \int d m_T^2 \int dy\, ,
+  \label{eq:mty-1pi}
+\end{eqnarray}
+one has
+\begin{eqnarray}
+m^2 
+\,\le& m_T^2 &\le\, 
+{S \over 4} \, , 
+\label{eq:mtybds-1-1pi}
+\\
+- \cosh^{-1}\bigg({ \sqrt{S} \over 2 m_T} \bigg)
+\,\le& y &\le\, 
+\cosh^{-1}\bigg({ \sqrt{S} \over 2 m_T} \bigg)\, ,
+\label{eq:mtybds-2-1pi}
+\end{eqnarray}
+and for 
+\begin{eqnarray}
+\int d(-T_1) \int d(-U_1) &=& S \int d y \int d m_T^2\, ,
+  \label{eq:ymt-1pi}
+\end{eqnarray}
+one has
+\begin{eqnarray}
+- {1 \over 2} \ln\bigg({1 + \beta_S \over 1 - \beta_S} \bigg)
+\,\le& y &\le\, 
+{1 \over 2} \ln\bigg({1 + \beta_S \over 1 - \beta_S} \bigg) \, ,
+\label{eq:ymtbds-1-1pi}
+\\
+m^2 \,\le& m_T^2 &\le\, 
+{S \over 4 \cosh^2(y)} \, .
+\label{eq:ymtbds-2-1pi}
+\end{eqnarray}
+
+
+
+
+
+\section{The \textsc{DiffTop} program}\label{sec:The DiffTop program}
+
+
+\textsc{DiffTop} is a Mellin space based threshold resummation code for the calculation of the 
+differential and total cross section for heavy-quark pair production 
+in 1PI kinematics at hadron colliders.
+Depending upon the choice of the inputs selected by the user through a user option file, 
+\textsc{DiffTop} calculates cross sections
+at LO ${\cal O}(\alpha_s^2)$, approximate NLO ${\cal O}(\alpha_s^3)$ and NNLO ${\cal O}(\alpha_s^4)$,
+in perturbative QCD beyond the leading logarithmic accuracy (NLL, NNLL).
+
+A selection of the desired parton distribution functions (PDFs) and evolution 
+of the strong coupling constant $\alpha_s$ is made through an interface to 
+the modern LHAPDF libraries~\cite{Butterworth:2014efa,lhapdf_web}.
+
+\textsc{DiffTop} is a tool for phenomenological analyses of heavy-flavor production at hadron colliders, 
+in particular for top-quark pair production. 
+Physics examples and detailed phenomenological studies can be found in Ref.~\cite{Guzzi:2014wia},
+where the results of transverse momentum and rapidity distributions 
+of final-state top quarks in proton-proton collisions at the LHC are compared 
+to the recent measurements by the ATLAS and CMS collaborations 
+at the center of mass energy of 7 TeV.  
+
+This program provides a basis for the inclusion of differential 
+$t\bar{t}$ cross sections into QCD analyses for the determination of PDFs at NNLO. 
+For the purpose of a fast calculation within global QCD analyses, 
+\textsc{DiffTop} is interfaced to \textsc{fastNLO}~\cite{dis2014Fast,Britzger:2012bs,Wobisch:2011ij,Kluge:2006xs} 
+and included into the QCD analysis platform \textsc{HERAFitter}~\cite{herafitter}. 
+The \textsc{DiffTop} interface to \textsc{fastNLO} allows, for the first time, the \textsc{HERAFitter} user 
+to perform full PDF fits by using the differential cross sections 
+of $t\bar{t}$ production. This allows the users to fully explore the potential 
+of the recent $t\bar{t}$ measurements at the LHC in QCD analyses for PDF determination.
+
+
+
+
+
+
+
+\section{Program installation}\label{sec:Program installation}
+
+\subsection{Content of the package}\label{sec:Content of the package}
+
+The package can be downloaded at \cite{difftop_web} and it requires the installation of the 
+LHAPDF libraries which are available at \cite{lhapdf_web}.
+The presented version of the package is tested with LHAPDF versions 5.8.9 and 5.9.0.
+
+The user can extract the files from the .tar.gz package by running the command:
+\begin{verbatim}
+tar -zxvf difftop-1.0.0.tar.gz
+\end{verbatim}
+This creates the directory \texttt{difftop-1.0.0} containing the subdirectory \texttt{manual} which includes the 
+users manual, and the following files:
+
+\begin{itemize}
+
+\item \texttt{setup.sh}: a small \texttt{shell} script containing lines to be edited by 
+the user for the correct inclusion of paths for the executables and LHAPDF libraries.
+
+\item \texttt{Makefile}: it allows the user to compile and link the Fortran programs with the \texttt{gfortran} compiler. 
+It might be edited to change the path for the LHAPDF libraries. The default option uses \texttt{lhapdf-config}:
+\begin{verbatim}
+LHAPDFLIBPATH = $(shell lhapdf-config --prefix)/lib
+\end{verbatim}
+
+\item \texttt{difftop1PI.f}: is the main file. It includes the transverse momentum $p_T$ and rapidity $y$ grids generation, 
+and the calls to the \textsc{Vegas} algorithm (documented in Ref.~\cite{Lepage:1977sw}) integration routine. 
+
+\item \texttt{Sfuncts.f}: it includes the analytical structure of the hard and soft functions of the threshold resummation formalism.
+
+\item \texttt{integrandpty.f}: it includes the logarithmic expansion and it represents the core of the calculation.
+
+\item \texttt{hadfold.f}: it includes the calls to the PDFs and $\alpha_s(\mu_R)$. 
+It includes the calls to initialize 
+the LHAPDF libraries and can be also customized for an independent stand-alone PDF module.
+
+\item \texttt{pac1.f}: is the wrapper for the LHAPDF libraries.
+
+\item \texttt{difftop.in}: is the user-option input file containing 29 options. It needs to be edited 
+according to the requirements of the specific computation.  
+
+\item \texttt{wgplg.f}: auxiliary Fortran subroutine for the calculation 
+of polylogarithmic functions available at~\cite{wgplg}.
+
+\item \texttt{vegas.f}: is a Fortran subroutine including the \textsc{Vegas} 
+algorithm~\cite{Lepage:1977sw,Lepage:1980dq,Press:1992zz}.
+
+ 
+\end{itemize}
+
+
+
+\subsection{Compiling}\label{sec:Compiling}
+
+Once the correct paths for the LHAPDF libraries are included in the \texttt{shell} script \texttt{setup.sh},  
+the user can source it by running the command:
+\begin{verbatim}
+source setup.sh
+\end{verbatim}
+
+Then, for compiling and linking, it is only necessary to type: 
+\begin{verbatim}
+make
+\end{verbatim}
+
+The executable file is generated, that is called \texttt{difftop1PI}.
+
+
+\section{Running \textsc{DiffTop}}\label{sec:Running DiffTop}
+
+To run \textsc{DiffTop}, in the current directory \texttt{./difftop-1.0.0},
+the user must type the command:
+\begin{verbatim}
+difftop1PI
+\end{verbatim}
+This starts the evaluation and the value(s) of the total(differential) cross section 
+are written in the output file \texttt{difftop.out} once the calculation is terminated.
+The file \texttt{difftop.out} is explained in the next sections.
+
+
+\subsection{Description of the input options file \texttt{difftop.in}}\label{sec:Description of the input options}
+
+Before starting the evaluation the user must edit the text file \texttt{difftop.in} according 
+to the configuration of the required calculation.
+The file \texttt{difftop.in} contains 29 lines arrenged in two columns (left and right). 
+The various options (left column) are decided by assigning a numerical (integer or real) value to the variables.
+A string of characters is utilized to decide which heavy quark is produced at the chosen collider.
+The right column contains definitions with a short explanation of the variables. 
+The structure of the file is illustrated in Table~\ref{difftop.in} that is explained line-by-line in what follows.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[ht]
+%\hspace{-6.0cm}
+\begin{centering}
+\begin{scriptsize}
+\begin{tabular}{|c|c|c|}
+\hline 
+\multicolumn{3}{|c|}{Description of the input file \texttt{difftop.in}} \tabularnewline
+\hline 
+\hline 
+1  &     0         &       choice: $p_T$ (0) or $y$ (1) distrib.; $\sigma^{p_T}_{TOT}$ (2) or $\sigma_{TOT}^y$ (3); \tabularnewline
+	\hline
+2  &     1         &       \texttt{PDFflag}: (1) LHAPDF; (0) stdalone PDFs module;\tabularnewline
+	\hline
+3  &     11200     &       \texttt{Iset}: index to select the PDFs relative to .LHgrid;\tabularnewline
+	\hline
+4  &     99        &       \texttt{nalfas}: (99) LHAPDF $\alpha_s$; (2,3) $\Lambda_{QCD}$ version, $\alpha_s(M_Z) = 0.118$;\tabularnewline 
+	\hline
+5  &     0.0878    &       \texttt{qcdl1} for $n^l_{f}=5$;\tabularnewline
+	\hline
+6  &     0.226     &       \texttt{qcdl2} for $n^l_{f}=5$; \tabularnewline
+	\hline
+7  &     0.186     &       \texttt{qcdl3} for $n^l_{f}=5$; \tabularnewline
+	\hline
+8  & 	0         & 	  \texttt{ipdf}: is (0) when \texttt{PDFflag}=1$\rightarrow$LHAPDF; (1) stdalone PDFs;\tabularnewline 
+	\hline
+9  & 	2         & 	  \texttt{naccur}: (0)  LL, (1) NLL, (2) NNLL;\tabularnewline
+	\hline
+10  &  	1         &  	  \texttt{nggborn}: $GG$ channel Born level;\tabularnewline
+	\hline
+11  & 	1         & 	  \texttt{nqqborn}: $Q\overline{Q}$ channel Born level;\tabularnewline
+	\hline
+12  & 	1         & 	  \texttt{nggnlo}: $GG$ channel NLO;\tabularnewline
+	\hline
+13  & 	1         & 	  \texttt{nqqnlo}: $Q\overline{Q}$ channel NLO;\tabularnewline
+	\hline
+14  & 	1         & 	  \texttt{nggnnlo}: $GG$ channel NNLO;\tabularnewline
+	\hline
+15  & 	1         & 	  \texttt{nqqnnlo}: $Q\overline{Q}$ channel NNLO;\tabularnewline
+	\hline
+16  & 	0         & 	  scale choice: (0) scale = $m_Q$; (1) scale $= \sqrt{m_Q^2+p_T^2}$\tabularnewline
+	\hline
+17  & 	1.0d0     & 	  $k_F=\mu_F/$scale \tabularnewline
+	\hline
+18  & 	1.0d0     & 	  $k_R=\mu_R/$scale \tabularnewline
+	\hline
+19  &     173.0d0   &       $m_q$: mass of the heavy quark \tabularnewline
+	\hline
+20  &     7000.0d0  &       center of mass energy [GeV]\tabularnewline
+	\hline
+21  &     5         &       Number of light flavors $n^l_{f}$ \tabularnewline
+	\hline
+22  &     top@LHC   &       heavy-quark produced at collider \tabularnewline
+	\hline
+23  &     1.0d0     &       $p_{T,min}$: Min val in $p_T$ grid \tabularnewline
+	\hline
+24  &     80.80d0   &       $p_{T,max}$: Max val in $p_T$ grid \tabularnewline
+	\hline
+25  &     40        &       $N_{pt}$: Num points for $(N_{pt}+1)$ $p_T$-output grid \tabularnewline 
+	\hline
+26  &     -3.5d0    &       $y_{min}$: Min val in $y$ grid \tabularnewline
+	\hline
+27  &     3.5d0     &       $y_{max}$: Max val in $y$ grid \tabularnewline
+	\hline
+28  &     40        &       $N_y$: Num points for $(N_y+1)$ $y$-output grid \tabularnewline
+	\hline
+29  &     0.2d0     &       cut-off parameter \texttt{del} \tabularnewline
+	\hline 
+\end{tabular}
+\end{scriptsize}
+\par
+\end{centering}
+\caption{Example of \texttt{difftop.in}. Input options for the \textsc{DiffTop} calculation 
+at approx NNLO + NNLL for calculating the $p_T$ spectrum 
+of the final-state top quark at the LHC 7 TeV.}
+\label{difftop.in}
+\end{table}
+
+
+\begin{itemize}
+
+\item {\bf line 1.} Integer number that selects the type of cross section which is being computed: 
+\\
+0 - transverse momentum $d\sigma/p_T$ distribution of the final-state heavy quark, in [pb/GeV];
+\\
+1 - rapidity distribution $d\sigma/dy$ in [pb];   
+\\
+2 - total cross section in [pb] obtained by the integral of the $p_T$ distribution;
+\\
+3 - total cross section in [pb] obtained by the integral of the $y$ distribution.
+
+\item {\bf line 2.} Integer number that selects between the LHAPDF libraries and the stand-alone PDFs:
+\\
+0 - stand-alone PDFs ;
+\\ 
+1 - PDFs are taken from the LHAPDF libraries. 
+
+\item {\bf line 3.} Integer number that selects the index of the PDF set relative to \texttt{.LHgrid} ({\it e.g.}  11200 is used for CT10NNLO, 21200 MSTW08, etc.).
+
+
+
+\item {\bf line 4.} Integer number that selects the $\alpha_s(\mu_R)$ running:
+\\
+99 - default value for LHAPDF based $\alpha_s$ evolution;
+\\
+(1,2,3) - value for the parametric $\alpha_s$ evolution in terms of the 
+asymptotic scale parameter $\Lambda$ at (1,2,3)-loop~\footnote{The implementation of the parametric formula 
+is cross checked against Eq.(5) of Ref.~\cite{Chetyrkin:2000yt}}.
+
+
+
+\item {\bf line 5.} Real number that is set to the value of $\Lambda$ at 1-loop in the $\overline{\textrm{MS}}$. 
+The default input is computed by using the \texttt{RunDec} code~\cite{Chetyrkin:2000yt} with input $\alpha_s(M_Z)=0.118$ and $n_f=5$.  
+
+
+\item {\bf line 6.} The same as line 5 but at 2-loop. 
+
+
+\item {\bf line 7.} The same as line 5 but at 3-loop.
+
+
+\item {\bf line 8.} Integer number that acts as a control flag in order to avoid 
+inconsistent evolutions of PDFs and $\alpha_s$: 
+\\
+0 - when the LHAPDF libraries are used at line 2, (default choice for most of the applications);   
+\\
+1 - in case stand-alone PDFs are used at line 2. 
+
+
+
+\item {\bf line 9.} Integer number that select the logarithmic accuracy:
+\\
+0 - LL;
+\\
+1 - NLL;
+\\
+2 - NNLL.
+
+\item {\bf line 10.} Integer number to activate the gluon-gluon channel at the Born level:
+\\
+(0,1) - (GG Born not active, GG Born active).
+ 
+\item {\bf line 11.} Integer number to activate the quark-antiquark channel at the Born level:
+\\
+(0,1) - (Q$\overline{\textrm{Q}}$ Born not active, Q$\overline{\textrm{Q}}$ Born active).
+
+\item {\bf line 12.} Integer number to activate the gluon-gluon channel at NLO:
+\\
+(0,1) - (GG@NLO not active, GG@NLO active).
+ 
+\item {\bf line 13.} Integer number to activate the quark-antiquark channel at NLO:
+\\
+(0,1) - (Q$\overline{\textrm{Q}}$@NLO not active, Q$\overline{\textrm{Q}}$@NLO active).
+
+\item {\bf line 14.} Integer number to activate the gluon-gluon channel at NNLO:
+\\
+(0,1) - (GG@NNLO not active, GG@NNLO active).
+ 
+\item {\bf line 15.} Integer number to activate the quark-antiquark channel at NNLO:
+\\
+(0,1) - (Q$\overline{\textrm{Q}}$@NNLO not active, Q$\overline{\textrm{Q}}$@NNLO active).
+
+\item {\bf line 16.} Integer number to select the scale choice in the calculation:
+\\
+0 - the scale is set to the mass of the heavy quark $Q=m_Q$ (default choice);
+\\
+1 - the scale is set dynamically according to $Q=\sqrt{m_Q^2 + p_T^2}$;
+
+\item {\bf line 17.} Real number to define the value of $k_F=\mu_F/scale$ for the factorization scale $\mu_F$ ($k_F=1$ default).
+
+\item {\bf line 18.} Real number to define the value of $k_R=\mu_R/scale$ for the renormalization scale $\mu_R$ ($k_R=1$ default).
+
+\item {\bf line 19.} Real number to define the value of heavy-quark mass. It is interpreted as the pole-mass.
+
+\item {\bf line 20.} Real number to define the value of the center of mass energy $\sqrt{S}$ in GeV.
+
+\item {\bf line 21.} Integer number to define the number of light flavors 
+in the calculation (\texttt{nlf}=5 is the default choice for top-quark pair production).
+
+\item {\bf line 22.} String of characters to define the heavy-quark produced 
+at the collider ({\it e.g.} \texttt{top@LHC} for top-quark pair production at the LHC, 
+\texttt{bottom@TEV} for the bottom-quark case at the Tevatron, etc.).
+
+\item {\bf line 23.} Real number to set the minimum value of the transverse momentum $p_{T,min}$. 
+By default, the minimum value is never taken below 1 GeV. This option holds at differential level only.
+
+\item {\bf line 24.} The same as line 23, but for the maximum value of the transverse momentum $p_{T,max}$.
+ 
+\item {\bf line 25.} Integer number to define the number of points $N_{pt}$ for the $p_T$ grid. 
+The output grid will contain $N_{pt}+1$ points. The analytic expression defining the $p_T$ grid 
+can be modified by manipulating the main file \texttt{difftop1PI.f} where the string ``\texttt{loop over pt}'' is located.  
+
+\item {\bf line 26.} Real number to set the minimum value of the rapidity $y_{min}$. This option holds at differential level only.
+
+\item {\bf line 27.} The same as line 26, but for the maximum value of the rapidity $y_{max}$. 
+
+\item {\bf line 28.} The same as line 25, but for the rapidity $y$. The string to be searched 
+in case of manipulation is ``\texttt{loop over y}''.  
+
+\item {\bf line 29.} Real number to set the value of the cutoff variable \texttt{del}. The default value is set to \texttt{del}=0.2.
+The calculation is very stable when this value is varied. This value corresponds to the parameter $\Delta$ introduced 
+in the plus-distribution definition of Eq.~(\ref{plus}).
+\end{itemize}
+
+
+
+It important to notice that the calculation of the total cross section, 
+when selected at line 1 of \texttt{difftop.in}, 
+does not depend on the choices at lines 23, 24 and 26, 27.
+These limits on $p_T$ and $y$ are only used for the case 
+of differential distribution evaluation (values 0 and 1 at line 1).
+
+According to the current configuration of \textsc{DiffTop}, the LHAPDF and stand-alone $\alpha_s$ and PDFs determinations are kept 
+separated by the use of the flags \texttt{PDFflag} and \texttt{ipdf}. It is possible to change this configuration 
+by modifying the logical statements located in the Fortran files \texttt{hadfold.f} (where the stand-alone PDFs module 
+must be placed) and \texttt{difftop1PI.f}.
+
+To perform a study of renormalization and factorization scale variation 
+the user must select the values at lines 17 and 18. 
+The case corresponding to $1/2 m_Q \leq \mu_F = \mu_R = m_Q \leq 2 m_Q $ 
+is reproduced by launching three separate jobs with the following settings:
+\begin{verbatim}
+              Run 1          Run 2         Run 3
+            ----------------------------------------
+              scale = mQ   scale = mQ   scale = mQ     
+              k_F = 0.5     k_F = 1.      k_F = 2. 
+              k_R = 0.5     k_R = 1.      k_R = 2.
+\end{verbatim}
+The column relative to Run 2 corresponds to the central configuration. 
+
+Please note that the current \textsc{DiffTop}-1.0.0 version implies only 
+simultaneous variations of the renormalization and factorization scales.
+The next release of the code will include the necessary terms 
+to allow for independent scale variations.
+Currently, the scale variation is restricted to $1/4 m_Q \leq \mu_F=\mu_R \leq 4 m_Q$.
+
+
+
+
+
+
+
+
+
+\subsection{Description of the output}\label{sec:Description of the output}
+
+The result of the calculation is printed in the text file \texttt{difftop.out}. 
+For the case of the total cross section, only one line is printed in which numbers are placed in columns: 
+\begin{verbatim}
+sqrt(S) [GeV], sigmatot [pb], +- error
+\end{verbatim}
+The first column contains the input center of mass energy in GeV, 
+the second the value of the total cross section in [pb] evaluated at the 
+heavy-quark mass $m_Q$ (pole) and scale $\mu_F,\mu_R$,
+while the third one contains the error estimate of the \textsc{Vegas} algorithm 
+which is given in terms of standard deviation.
+
+For the case of differential distributions, the output is similar:  
+\begin{verbatim}
+pT [GeV] or y, dsigma/dpT [pb/GeV] or dsigma/dy [pb], +- error
+...      ....                                   ....
+...      ....                                   .... 
+\end{verbatim}
+where the first column accounts for the grid of the selected differential variable $p_T$ or $y$,
+the second contains the differential distribution in the appropriate units ([pb/GeV] for $p_T$ spectrum 
+or [pb] for rapidity), and the third one is the \textsc{Vegas} error.  
+
+The final cross section is obtained as the sum of the Born level, 
+inelastic and elastic cross section contributions. 
+The inelastic contribution includes terms which are proportional 
+to the first logarithm on the right-hand side of Eq.~(\ref{plus}), while the 
+elastic one is proportional to logarithms of $\Delta/m_Q^2$ on the left-hand side.
+
+According to the current settings of the integration routines, 
+the accuracy of the calculation
+\footnote{It refers to the value of the standard deviation output of the \texttt{vegas.f} routine}
+for each single contribution is at the per-mill level, 
+which is accurate enough for phenomenological applications at collders. 
+The settings for the integration accuracy can be modified by searching for the string 
+\texttt{VEGAS parameters} in the main file \texttt{difftop1PI.f}.
+These modifications will affect the evaluation speed.
+
+
+
+
+
+
+
+
+\subsection{Test run}\label{sec:Test run}
+
+As an example, the computation for few points of the $p_T$ spectrum 
+relative to the input reported in Table~\ref{difftop.in} 
+is performed and numerical results are illustrated in Table~\ref{test-run}.
+Reported is also the total cross section.
+
+\begin{table}[h]
+\begin{centering}
+\begin{scriptsize}
+\begin{tabular}{|c|c|c|}
+\hline 
+\multicolumn{2}{|c|}{CT10NNLO,~ LHC 7 TeV,~ $m_t=173$ GeV} \tabularnewline
+\hline 
+\hline 
+$p_T^{t}$ [GeV] & $d\sigma/dp_T$ [pb/GeV] \tabularnewline
+\hline 
+1  & 0.0437   \tabularnewline
+\hline
+75  & 1.270   \tabularnewline
+\hline 
+80  & 1.256   \tabularnewline
+\hline 
+150  & 0.679   \tabularnewline
+\hline 
+$\sigma_{tot}$ [pb] & 179.9 \tabularnewline
+\hline 
+\end{tabular}
+\end{scriptsize}
+\par
+\end{centering}
+\caption{A test run with \textsc{DiffTop} corresponding to the input file in Table~\ref{difftop.in} }
+\label{test-run}
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Summary}\label{sec:Summary}
+
+A description of the \textsc{DiffTop} Fortran based package has been presented.
+This code calculates the total and differential cross sections 
+for heavy-quark pair production 
+at hadron colliders at LO, approximate NLO, and NNLO in QCD, 
+by using technique of threshold resummation beyond the leading logarithmic approximation.
+This flexible program represents an important tool for
+analyses that are of interest for phenomenological 
+studies at hadron colliders with particular emphasis on top-quark pair production. 
+Details of the distributions of the transverse momentum and rapidity of the 
+final-state top-quark can be generated by selecting the desired PDF set, scale, $\alpha_s$ 
+and top quark mass $m_t$. 
+\textsc{DiffTop} theoretical predictions have been compared to the recent measurements 
+by the CMS and ATLAS collaborations, and detailed results together with an 
+extensive discussion can be found in Ref.~\cite{Guzzi:2014wia}.
+
+
+
+
+\section*{Acknowledgments}
+
+We are grateful to Daniel Britzger (\textsc{FastNLO} Collaboration) for assistance 
+in the implementation of \textsc{DiffTop} in \textsc{FastNLO}, 
+and for providing us with the corresponding tables.
+This work is supported in part by the 
+``Initiative and Networking Fund of the Helmholtz Association (HGF) under the contract S0-072'',
+by Deutsche Forschungsgemeinschaft in Sonderforschungs\-be\-reich/Transregio~9, 
+by the European Commission through contract PITN-GA-2010-264564 ({\it LHCPhenoNet}), 
+and it was realized within the scope of the PROSA collaboration.
+
+
+\bibliographystyle{h-elsevier3}
+\begin{thebibliography}{10}
+
+\bibitem{Nason:1987xz}
+P. Nason, S. Dawson and R.K. Ellis,
+\newblock Nucl.Phys. B303 (1988) 607.
+%%CITATION = NUPHA,B303,607;%%
+
+\bibitem{Nason:1989zy}
+P. Nason, S. Dawson and R.K. Ellis,
+\newblock Nucl.Phys. B327 (1989) 49.
+%%CITATION = NUPHA,B327,49;%%
+
+\bibitem{Beenakker:1988bq}
+W. Beenakker et~al.,
+\newblock Phys.Rev. D40 (1989) 54.
+%%CITATION = PHRVA,D40,54;%%
+
+\bibitem{Meng:1989rp}
+R. Meng et~al.,
+\newblock Nucl.Phys. B339 (1990) 325.
+%%CITATION = NUPHA,B339,325;%%
+
+\bibitem{Beenakker:1990maa}
+W. Beenakker et~al.,
+\newblock Nucl.Phys. B351 (1991) 507.
+%%CITATION = NUPHA,B351,507;%%
+
+\bibitem{Mangano:1991jk}
+M.L. Mangano, P. Nason and G. Ridolfi,
+\newblock Nucl.Phys. B373 (1992) 295.
+%%CITATION = NUPHA,B373,295;%%
+
+\bibitem{Czakon:2013goa}
+M. Czakon, P. Fiedler and A. Mitov,
+\newblock Phys.Rev.Lett. 110 (2013) 252004, 1303.6254.
+%%CITATION = ARXIV:1303.6254;%%
+
+\bibitem{Czakon:2012pz}
+M. Czakon and A. Mitov,
+\newblock JHEP 1301 (2013) 080, 1210.6832.
+%%CITATION = ARXIV:1210.6832;%%
+
+\bibitem{Czakon:2012zr}
+M. Czakon and A. Mitov,
+\newblock JHEP 1212 (2012) 054, 1207.0236.
+%%CITATION = ARXIV:1207.0236;%%
+
+\bibitem{Baernreuther:2012ws}
+P. B{\"a}rnreuther, M. Czakon and A. Mitov,
+\newblock Phys.Rev.Lett. 109 (2012) 132001, 1204.5201.
+%%CITATION = ARXIV:1204.5201;%%
+
+\bibitem{Czakon:2007wk}
+M. Czakon, A. Mitov and S. Moch,
+\newblock Nucl.Phys. B798 (2008) 210, 0707.4139.
+%%CITATION = ARXIV:0707.4139;%%
+
+\bibitem{Czakon:2007ej}
+M. Czakon, A. Mitov and S. Moch,
+\newblock Phys.Lett. B651 (2007) 147, 0705.1975.
+%%CITATION = ARXIV:0705.1975;%%
+
+\bibitem{Mitov:2006xs}
+A. Mitov and S. Moch,
+\newblock JHEP 0705 (2007) 001, hep-ph/0612149.
+%%CITATION = HEP-PH/0612149;%%
+
+\bibitem{Ferroglia:2009ep}
+A. Ferroglia et~al.,
+\newblock Phys.Rev.Lett. 103 (2009) 201601, 0907.4791.
+%%CITATION = ARXIV:0907.4791;%%
+
+\bibitem{Ferroglia:2009ii}
+A. Ferroglia et~al.,
+\newblock JHEP 0911 (2009) 062, 0908.3676.
+%%CITATION = ARXIV:0908.3676;%%
+
+\bibitem{Czakon:2010td}
+M. Czakon,
+\newblock Phys.Lett. B693 (2010) 259, 1005.0274.
+%%CITATION = ARXIV:1005.0274;%%
+
+\bibitem{Bierenbaum:2011gg}
+I. Bierenbaum, M. Czakon and A. Mitov,
+\newblock Nucl.Phys. B856 (2012) 228, 1107.4384.
+%%CITATION = ARXIV:1107.4384;%%
+
+\bibitem{Baernreuther:2013caa}
+P. B{\"a}rnreuther, M. Czakon and P. Fiedler,
+\newblock JHEP 1402 (2014) 078, 1312.6279.
+%%CITATION = ARXIV:1312.6279;%%
+
+\bibitem{Czakon:2011xx}
+M. Czakon and A. Mitov,
+\newblock (2011), 1112.5675.
+%%CITATION = ARXIV:1112.5675;%%
+
+\bibitem{Aliev:2010zk}
+M. Aliev et~al.,
+\newblock Comput.Phys.Commun. 182 (2011) 1034, 1007.1327.
+%%CITATION = ARXIV:1007.1327;%%
+
+\bibitem{Kidonakis:2014isa}
+N. Kidonakis,
+\newblock Phys.Rev. D90 (2014) 014006, 1405.7046.
+%%CITATION = ARXIV:1405.7046;%%
+
+\bibitem{Kidonakis:2000ui}
+N. Kidonakis,
+\newblock Phys.Rev. D64 (2001) 014009, hep-ph/0010002.
+%%CITATION = HEP-PH/0010002;%%
+
+\bibitem{Kidonakis:2001nj}
+N. Kidonakis et~al.,
+\newblock Phys.Rev. D64 (2001) 114001, hep-ph/0105041.
+%%CITATION = HEP-PH/0105041;%%
+
+\bibitem{Kidonakis:2003tx}
+N. Kidonakis,
+\newblock Int.J.Mod.Phys. A19 (2004) 1793, hep-ph/0303186.
+%%CITATION = HEP-PH/0303186;%%
+
+\bibitem{Kidonakis:2003qe}
+N. Kidonakis and R. Vogt,
+\newblock Phys.Rev. D68 (2003) 114014, hep-ph/0308222.
+%%CITATION = HEP-PH/0308222;%%
+
+\bibitem{Kidonakis:2005kz}
+N. Kidonakis,
+\newblock Phys.Rev. D73 (2006) 034001, hep-ph/0509079.
+%%CITATION = HEP-PH/0509079;%%
+
+\bibitem{Kidonakis:2008mu}
+N. Kidonakis and R. Vogt,
+\newblock Phys.Rev. D78 (2008) 074005, 0805.3844.
+%%CITATION = ARXIV:0805.3844;%%
+
+\bibitem{Kidonakis:2010tc}
+N. Kidonakis,
+\newblock Phys.Rev. D81 (2010) 054028, 1001.5034.
+%%CITATION = ARXIV:1001.5034;%%
+
+\bibitem{Kidonakis:2010dk}
+N. Kidonakis,
+\newblock Phys.Rev. D82 (2010) 114030, 1009.4935.
+%%CITATION = ARXIV:1009.4935;%%
+
+\bibitem{Czakon:2009zw}
+M. Czakon, A. Mitov and G.F. Sterman,
+\newblock Phys.Rev. D80 (2009) 074017, 0907.1790.
+%%CITATION = ARXIV:0907.1790;%%
+
+\bibitem{Guzzi:2014wia}
+M. Guzzi, K. Lipka and S.O. Moch,
+\newblock (2014), 1406.0386.
+%%CITATION = ARXIV:1406.0386;%%
+
+\bibitem{difftop_web}
+M. Guzzi, K. Lipka and S. Moch,
+\newblock 2014,
+\newblock {\url{https://difftop.hepforge.org/}}.
+
+\bibitem{Butterworth:2014efa}
+J. Butterworth et~al.,
+\newblock (2014), 1405.1067.
+%%CITATION = ARXIV:1405.1067;%%
+
+\bibitem{lhapdf_web}
+The LHAPDF Working Group, A. Buckley et~al.,
+\newblock {Forthcoming paper}, 2014,
+\newblock {\url{https://lhapdf.hepforge.org/}}.
+
+\bibitem{dis2014Fast}
+D. Britzger et~al.,
+\newblock {DIS 2014 - XXII. International Workshop on Deep-Inelastic Scattering
+  and Related Subjects}, 2014,
+\newblock
+  {\url{http://indico.cern.ch/event/258017/session/1/contribution/202}}.
+
+\bibitem{Britzger:2012bs}
+fastNLO Collaboration, D. Britzger et~al.,
+\newblock (2012) 217, 1208.3641.
+%%CITATION = ARXIV:1208.3641;%%
+
+\bibitem{Wobisch:2011ij}
+fastNLO Collaboration, M. Wobisch et~al.,
+\newblock (2011), 1109.1310.
+%%CITATION = ARXIV:1109.1310;%%
+
+\bibitem{Kluge:2006xs}
+T. Kluge, K. Rabbertz and M. Wobisch,
+\newblock (2006) 483, hep-ph/0609285.
+%%CITATION = HEP-PH/0609285;%%
+
+\bibitem{herafitter}
+The HERAFITTER Working Group, A. Glazov et~al.,
+\newblock {Forthcoming paper}, 2014,
+\newblock {\url{https://wiki-zeuthen.desy.de/HERAFitter}}.
+
+\bibitem{wgplg}
+W.v. Neerven,
+\newblock
+  {\url{http://www.lorentz.leidenuniv.nl/research/neerven/DECEASED/zwprod.uu}}.
+
+\bibitem{Lepage:1977sw}
+G.P. Lepage,
+\newblock J.Comput.Phys. 27 (1978) 192.
+%%CITATION = JCTPA,27,192;%%
+
+\bibitem{Lepage:1980dq}
+G.P. Lepage,
+\newblock (1980).
+%%CITATION = CLNS-80/447 ETC.;%%
+
+\bibitem{Press:1992zz}
+W.H. Press et~al.,
+\newblock (1992).
+%%CITATION = ISBN-9780521430647 ETC.;%%
+
+\bibitem{Lai:1999wy}
+CTEQ Collaboration, H. Lai et~al.,
+\newblock Eur.Phys.J. C12 (2000) 375, hep-ph/9903282.
+%%CITATION = HEP-PH/9903282;%%
+
+\bibitem{Chetyrkin:2000yt}
+K. Chetyrkin, J.H. Kuhn and M. Steinhauser,
+\newblock Comput.Phys.Commun. 133 (2000) 43, hep-ph/0004189.
+%%CITATION = HEP-PH/0004189;%%
+
+\end{thebibliography}
+%\bibliography{top-draft}
+
+
+\end{document} 
+
+
+
+

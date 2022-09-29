@@ -1,0 +1,198 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Welcome to DiffTop version 1.0.0
+
+A code for the calculation of the 
+differential and total cross section 
+for heavy-quark production at hadron colliders.
+
+Cross sections are calculated in 1PI kinematics 
+at LO, approx NLO and approx NNLO in QCD, 
+by employing techniques of QCD threshold resummation 
+beyond the leading logarithmic accuracy.
+
+Please refer to the following papers 
+if you are using this code:
+
+arXiv:1406.0386 [hep-ph];
+arXiv:1409.0444 [hep-ph];
+arXiv:1308.1635 [hep-ph];
+
+by Authors: Marco Guzzi, Katerina Lipka, Sven-Olaf Moch
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+-------------------------
+BEFORE THE INSTALLATION.
+-------------------------
+DiffTop requires the installation of LHAPDF libraries. 
+Please download these from  
+
+http://lhapdf.hepforge.org/lhapdf5/
+
+The LHAPDF libraries which are currently 
+supported are: lhapdf-5.8.8 up to lhapdf-5.9.1 .
+
+
+
+--------------
+INSTALLATION.
+--------------
+
+1) Untar unzip the file difftop-1.0.0.tar.gz by using 
+
+tar -zxvf difftop-1.0.0.tar.gz
+
+The directories 
+
+~/difftop-1.0.0/ 
+
+is created.
+
+
+2) Checking the file content: 
+
+The subdirectory: 
+
+~/difftop-1.0.0/doc/
+
+contains the DiffTop-1.0.0 users manual (TeX and PDF) with the description
+and usage of the code. Please read Sec. 5 and 6 bofore starting. 
+
+
+
+
+-MAIN FORTRAN FILES-
+
+- setup.sh: a small shell script containing lines to be edited by 
+            the user for the correct inclusion of paths 
+            for the executables and LHAPDF libraries.
+
+
+- Makefile:  it allows the user to compile and link the 
+             Fortran programs with the \texttt{gfortran} compiler. 
+             It might be edited to change the path for 
+             the LHAPDF libraries. The default option 
+             uses lhapdf-config: 
+
+             LHAPDFLIBPATH = $(shell lhapdf-config --prefix)/lib
+
+
+- difftop1PI.f: is the main file. It includes the transverse 
+                momentum p_T and rapidity y grids generation, 
+                and the calls to the Vegas algorithm integration routine.
+
+
+- integrandpty.f: it includes the logarithmic 
+                expansion and it represents 
+                the core of the calculation.
+
+
+- Sfuncts.f: it includes the analytical structure of the 
+                hard and soft functions of 
+                the threshold resummation formalism.
+
+- hadfold.f: it includes the calls to the PDFs and alpha_s(mu_R). 
+             Also, it includes the calls to initialize the LHAPDF libs.
+
+
+- pac1.f: is a wrapper for the LHAPDF libraries.
+
+
+- difftop.in: is the user-option input file containing 29 input options. 
+              It needs to be edited  according to the 
+              requirements of the specific computation.  
+
+
+- AUXILIARY FILES -
+
+- wgplg.f: auxiliary Fortran subroutine for the 
+           calculation of polylogarithmic functions.
+           This was distributed in the past by W.L. van Neerven:
+           http://www.lorentz.leidenuniv.nl/research/neerven/DECEASED/zwprod.uu
+           
+- vegas.f: is a slightly modified version of the Fortran code 
+           which includes the Vegas algorithm. 
+           Written by G.P. Lepage and documented and 
+           published in J.Comput.Phys. 27 (1978) 192
+
+
+
+- COMPILING & LINKING -
+
+Once the correct paths for the LHAPDF libraries 
+are included in the shell script "setup.sh",  
+the user can source it by running the command:
+
+source setup.sh
+
+
+For compiling and linking, it is only necessary to type: 
+
+make
+
+The executable file is generated, that is called: 
+
+difftop1PI
+
+
+-----------------
+RUNNING DIFFTOP
+-----------------
+
+To run DiffTop in the current directory ./difftop-1.0.0
+the user must type the command:
+
+difftop1PI
+
+This starts the evaluation and the value(s) of the total(differential) cross section 
+are written in the output file difftop.out once the calculation is terminated.
+Please read the Users manual for the description of the user-input file
+difftop.in to change the options.
+
+
+---------
+OUTPUT
+---------
+The output of the calculation is printed in 
+the text file difftop.out is explained
+
+TOTAL CROSS SECTION:
+
+If the total cross section is calculated, the output file difftop.out
+will contain only 1 single line: 
+
+"sqrt(S)[GeV], sigmatot [pb], Err"
+
+DIFFERENTIAL DISTRIBUTION (pT or y)
+
+If the differential cross section is calculated (pT or y), 
+the output file difftop.out will contain only 1 single line: 
+
+For the pT spectrum one has
+
+"pT[GeV], dsigma/pT[pb/GeV],  Err"
+...        ...               ...
+...        ...               ...
+
+For the rapidity 
+
+"y,        dsigma/dy[pb],    Err"
+...        ...               ...
+...        ...               ...
+
+
+The current accuracy of Vegas integration is set in such a way that 
+the Born level, elastic and inelastic cross sections, 
+are evaluated at the per-mill level.
+This can be changed in the difftop1PI.f 
+main fortran subroutine by searching 
+for the line: 'VEGAS parameters' .
+
+In case of any questions or problems please email us:
+
+marco.guzzi@desy.de, 
+katerina.lipka@desy.de,
+sven-olaf.moch@desy.de .

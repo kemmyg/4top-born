@@ -1,0 +1,30 @@
+2               ptyhoice: pt (0) or y (1) distrib.; sigma_total (2) or (3);
+1               PDFflag: (1) LHAPDF; (0) Stand alone PDFs;
+42960           Iset index to select the PDFs relative to .LHgrid;
+99              nalfas: (99) LHAPDF alphas; (2,3) Lambda_QCD version, alphas(M_Z) = 0.118;
+0.0878          qcdl1 for nlf=5;
+0.226           qcdl2 for nlf=5;
+0.186           qcdl3 for nlf=5;
+0               ipdf: is (0) when PDFflag=1 ->LHAPDF; (1) stdalone PDFs;
+0               naccur (0)  LL, (1) NLL, (2) NNLL;
+0               nggborn: GG channel Born level;
+1               nqqborn: QQb channel Born level;
+0               nggnlo: GG channel NLO;
+0               nqqnlo: QQb channel NLO;
+0               nggnnlo: GG channel NNLO;
+0               nqqnnlo: QQb channel NNLO;
+0               scale choice: (0) scale = mq; (1) scale = sqrt(mq^2+pt^2)
+1.0d0           mfac:  muF/scale
+1.0d0           kR:    muR/scale
+173d0     	mq: mass of the heavy quark
+13000d0         center of mass energy
+5               Number of light flavors nlf
+top@LHC         heavy-quark produced at collider
+0d0             pTmin: Min val in pT grid
+1000d0          pTmax: Max val in pT grid
+20000           Npt: Num points for (Npt+1) pT-output grid
+-10d0           ymin: Min val in y grid
+10d0            ymax: Max val in y grid
+20000           Ny: Num points for (Ny+1) y-output grid
+0.0d0           cutoff parameter del
+3 		choice: (1,2) partonic cross section wrt (sqrt(s),beta),3 total xsec for one scms, (4,5) luminosity wrt (sqrt(s),beta),6 saturation smax, (7) total xsec for several scms values
